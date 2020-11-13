@@ -21,3 +21,6 @@ def USTradingCalendar():
             USThanksgivingDay
         ]
     return USTradingCalendar()
+def USOtherNonTradingDates():
+    # December 5, 2018: National Day of Mourning for George H.W. Bush
+    return ['2018-12-05']
