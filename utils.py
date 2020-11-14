@@ -18,3 +18,7 @@ def confirm(question, default='no'):
                 return util.strtobool(resp)
         except ValueError:
             print("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
+
+from colorama import Style
+def cprint(text, color):
+    print(f'{color}{text}{Style.RESET_ALL}')
