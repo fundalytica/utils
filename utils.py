@@ -39,4 +39,4 @@ def size(data):
 
 # pretty print
 def pprint(obj):
-    return json.dumps(obj, indent=4, sort_keys=True)
+    print(json.dumps(obj, indent=4, sort_keys=True))
