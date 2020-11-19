@@ -34,6 +34,9 @@ def terminal():
     return sys.stdin.isatty()
 
 # data size
+def size(data):
+    return f'{(sys.getsizeof(data) / 1024 / 1024):.2f} MB'
+
 # pretty print
 def pprint(obj):
     return json.dumps(obj, indent=4, sort_keys=True)
