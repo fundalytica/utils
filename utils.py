@@ -1,4 +1,9 @@
+import sys
+import json
+
 from distutils import util
+from colorama import Style
+
 # user confirmation prompt
 def confirm(question, default='no'):
     if default is None:
@@ -20,17 +25,14 @@ def confirm(question, default='no'):
         except ValueError:
             print("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
-from colorama import Style
 # color print
 def cprint(text, color):
     print(f'{color}{text}{Style.RESET_ALL}')
 
-import sys
 # using tty
 def terminal():
     return sys.stdin.isatty()
 
-import json
 # data size
 # pretty print
 def pprint(obj):
