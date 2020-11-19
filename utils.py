@@ -22,3 +22,11 @@ def confirm(question, default='no'):
 from colorama import Style
 def cprint(text, color):
     print(f'{color}{text}{Style.RESET_ALL}')
+
+import sys
+def terminal():
+    return sys.stdin.isatty()
+
+import json
+def pprint(obj):
+    return json.dumps(obj, indent=4, sort_keys=True)
