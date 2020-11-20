@@ -1,8 +1,19 @@
+import csv
+
 from utils import utils
 
 from colorama import Fore
 
 import pandas as pd
+
+def read_csv(file):
+    rows = []
+
+    with open(file, encoding='utf-8-sig') as csvfile:
+        for row in csv.reader(csvfile):
+            rows.append(row)
+
+    return rows
 
 # read data frame
 def df_read(file, sort=False, verbose=False):
