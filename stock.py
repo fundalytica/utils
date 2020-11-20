@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 import pandas as pd
 from pandas.tseries.holiday import AbstractHolidayCalendar, Holiday, nearest_workday, USMartinLutherKingJr, USPresidentsDay, USMemorialDay, USLaborDay, USThanksgivingDay, GoodFriday
@@ -24,6 +25,15 @@ def USTradingCalendar():
         ]
     return USTradingCalendar()
 
-def USOtherNonTradingDates():
-    # December 5, 2018: National Day of Mourning for George H.W. Bush
-    return ['2018-12-05']
+def isUSMarketOpen(nyc_date):
+    # trading hours 09:30 - 16:00
+    trading_start = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 9, 0, 0, tzinfo=nyc_date.tzinfo)
+    trading_end = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 16, 30, 0, tzinfo=nyc_date.tzinfo)
+
+    in_trading_hours = nyc_date <= trading_end and nyc_date >= trading_start
+
+    # nyc_date = datetime(1971, 2, 15) # test holiday 1971-02-15
+    holidays = USTradingCalendar().holidays(nyc_date, nyc_date)
+    is_not_holiday = len(holidays) == 0
+
+    return is_not_holiday and in_trading_hours
