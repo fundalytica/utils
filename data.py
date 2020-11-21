@@ -16,7 +16,7 @@ import pandas as pd
 #     return rows
 
 # read data frame
-def df_read(file, sort=False, verbose=False):
+def df_read(file, index=None, sort=False, verbose=False):
     csv = utils.file_extension(file) == '.csv'
 
     if verbose:
@@ -25,7 +25,7 @@ def df_read(file, sort=False, verbose=False):
 
     try:
         if csv:
-            df = pd.read_csv(file, index_col='date')
+            df = pd.read_csv(file, index_col=index)
         else:
             df = pd.read_pickle(file)
 
