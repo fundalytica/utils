@@ -26,14 +26,16 @@ def USTradingCalendar():
     return USTradingCalendar()
 
 def isUSMarketOpen(nyc_date):
-    # trading hours 09:30 - 16:00
-    trading_start = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 9, 0, 0, tzinfo=nyc_date.tzinfo)
-    trading_end = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 16, 30, 0, tzinfo=nyc_date.tzinfo)
-
-    in_trading_hours = nyc_date <= trading_end and nyc_date >= trading_start
+    # not a weekend
+    is_not_weekend = nyc_date.weekday() not in [5,6]
 
     # nyc_date = datetime(1971, 2, 15) # test holiday 1971-02-15
     holidays = USTradingCalendar().holidays(nyc_date, nyc_date)
     is_not_holiday = len(holidays) == 0
 
-    return is_not_holiday and in_trading_hours
+    # trading hours 09:30 - 16:00
+    trading_start = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 9, 0, 0, tzinfo=nyc_date.tzinfo)
+    trading_end = datetime(nyc_date.year, nyc_date.month, nyc_date.day, 16, 30, 0, tzinfo=nyc_date.tzinfo)
+    in_trading_hours = nyc_date <= trading_end and nyc_date >= trading_start
+
+    return is_not_weekend and is_not_holiday and in_trading_hours
