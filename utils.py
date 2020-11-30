@@ -42,6 +42,7 @@ def file_extension(file):
 
 # json pretty print
 def json_print(obj):
+    obj = json.loads(obj)
     print(json.dumps(obj, indent=4, sort_keys=True))
 
 # color print
