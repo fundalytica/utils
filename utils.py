@@ -40,9 +40,8 @@ def file_name(file):
 def file_extension(file):
     return os.path.splitext(file)[1]
 
-# json pretty print
-def json_print(obj):
-    obj = json.loads(obj)
+# convert obj into json and print
+def obj_print(obj):
     print(json.dumps(obj, indent=4, sort_keys=True))
 
 # color print
