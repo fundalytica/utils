@@ -40,7 +40,7 @@ def file_name(file):
 def file_extension(file):
     return os.path.splitext(file)[1]
 
-# convert obj into json and print
+# obj pretty printing (converts into json)
 def obj_print(obj):
     print(json.dumps(obj, indent=4, sort_keys=True))
 
