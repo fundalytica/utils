@@ -4,6 +4,8 @@ import json
 import pathlib
 from distutils import util
 
+import pandas as pd
+
 from colorama import Style
 
 # user confirmation prompt
@@ -51,3 +53,8 @@ def cprint(text, color):
 # data size
 def size(data):
     return f'{(sys.getsizeof(data) / 1024 / 1024):.2f} MB'
+
+# https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#from-timestamps-to-epoch
+def pd_ts_to_unix_ts(pd_ts):
+    return (pd_ts - pd.Timestamp("1970-01-01")) // pd.Timedelta('1s')
+
