@@ -5,8 +5,8 @@ import pathlib
 from distutils import util
 
 import pandas as pd
-
 from colorama import Style
+from pympler import asizeof
 
 # user confirmation prompt
 def confirm(question, default='no'):
@@ -50,9 +50,9 @@ def obj_print(obj):
 def cprint(text, color):
     print(f'{color}{text}{Style.RESET_ALL}')
 
-# data size
-def size(data):
-    return f'{(sys.getsizeof(data) / 1024 / 1024):.2f} MB'
+# data size in mb
+def mbsize(data):
+    return f'{(asizeof.asizeof(data) / 1024 / 1024):.2f} MB'
 
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#from-timestamps-to-epoch
 def pd_ts_to_unix_ts(pd_ts):
