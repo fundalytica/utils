@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import pprint
 import pathlib
 from distutils import util
 
@@ -29,22 +30,38 @@ def confirm(question, default='no'):
         except ValueError:
             print("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
+# handle keyboard interrupt while running script
+def handle_interrupt(method):
+    try:
+        method()
+    except KeyboardInterrupt:
+        print('\nBye :)\n')
+        sys.exit(0)
+
 # running from terminal
 def terminal():
     return sys.stdin.isatty()
 
+# __file__
 def file_path(file):
     return pathlib.Path(file).parent.absolute()
 
+# __file__
 def file_name(file):
-    return os.path.splitext(file)[0]
+    return os.path.splitext(os.path.basename(file))[0]
 
+# __file__
 def file_extension(file):
-    return os.path.splitext(file)[1]
+    return os.path.splitext(os.path.basename(file))[1]
 
 # obj pretty printing (converts into json)
 def obj_print(obj):
     print(json.dumps(obj, indent=4, sort_keys=True))
+
+# pretty print
+def pretty_print(obj):
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(obj)
 
 # color print
 def cprint(text, color):
