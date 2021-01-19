@@ -6,6 +6,8 @@ from colorama import Fore
 
 import pandas as pd
 
+import os
+
 # def read_csv(file):
 #     rows = []
 
@@ -45,9 +47,12 @@ def df_read(file, index=None, sort=False, verbose=False):
     return df
 
 # write data frame
-def df_write(df, file, sort=False, verbose=False):
+def df_write(df, file, index=True, sort=False, verbose=False):
     csv = utils.file_extension(file) == '.csv'
-    print(utils.file_extension(file))
+
+    dir = utils.file_path(file)
+    if not os.path.exists(dir):
+        os.mkdir(dir)
 
     if verbose:
         utils.cprint('\n[ DataFrame Write ]', Fore.GREEN)
@@ -57,9 +62,9 @@ def df_write(df, file, sort=False, verbose=False):
         df.sort_index(inplace=True)
 
     if csv:
-        df.to_csv(file)
+        df.to_csv(file, index=index)
     else:
-        df.to_pickle(file)
+        df.to_pickle(file, index=index)
 
     if verbose:
         utils.cprint('> OK', Fore.MAGENTA)
