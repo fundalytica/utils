@@ -4,6 +4,8 @@
 import yaml
 import requests
 
+from colorama import Fore
+
 MAILGUN_URL = "https://api.mailgun.net/v3" # EU "https://api.eu.mailgun.net/v3"
 
 def get_config(parameter):
@@ -36,13 +38,15 @@ if __name__ == "__main__":
     import utils
 
     recipients = [get_config('admin')]
-    # recipients = ['test-zt9loea83@srv1.mail-tester.com']
+    # recipients = ['test-4gmka8l4p@srv1.mail-tester.com']
     subject = 'Hello'
     text = 'This is Mailgun!'
     response = send_simple_message(recipients, subject, text)
     # response = send_simple_message(recipients, subject, text, admin=get_config('admin'))
 
-    print(response)
-    print(response.text)
+    utils.cprint(recipients, Fore.CYAN)
+    utils.cprint(f'{subject}: {text}', Fore.GREEN)
+    utils.cprint(response, Fore.YELLOW)
+    utils.cprint(response.text, Fore.MAGENTA)
 else:
     from utils import utils
