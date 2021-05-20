@@ -75,3 +75,6 @@ def mbsize(data):
 def pd_ts_to_unix_ts(pd_ts):
     return (pd_ts - pd.Timestamp("1970-01-01")) // pd.Timedelta('1s')
 
+# unique list
+def unique(lst):
+    return list(set(lst))
