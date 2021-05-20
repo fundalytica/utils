@@ -4,8 +4,6 @@
 import yaml
 import requests
 
-import utils
-
 MAILGUN_URL = "https://api.mailgun.net/v3" # EU "https://api.eu.mailgun.net/v3"
 
 def get_config(parameter):
@@ -13,7 +11,11 @@ def get_config(parameter):
         config = yaml.load(file, yaml.Loader)
         return config[parameter]
 
-def send_simple_message(sender, recipients, subject, text, sender_name=None, admin=None):
+def send_simple_message(recipients, subject, text, sender=None, sender_name=None, admin=None):
+    # use default sender
+    if not sender:
+        sender = get_config('default_sender_email')
+        sender_name = get_config('default_sender_name')
     # add name to sender
     if sender_name:
         sender = f'{sender_name} <{sender}>'
@@ -30,14 +32,17 @@ def send_simple_message(sender, recipients, subject, text, sender_name=None, adm
 
     return requests.post(url, auth=auth, data=data)
 
-sender = get_config('default_sender_email')
-recipients = [get_config('admin')]
-# recipients = ['test-zt9loea83@srv1.mail-tester.com']
-subject = 'Hello'
-text = 'This is Mailgun!'
-response = send_simple_message(sender, recipients, subject, text)
-# response = send_simple_message(sender, recipients, subject, text, admin=get_config('admin'))
-# response = send_simple_message(sender, recipients, subject, text, sender_name=get_config('default_sender_name'))
+if __name__ == "__main__":
+    import utils
 
-print(response)
-print(response.text)
+    recipients = [get_config('admin')]
+    # recipients = ['test-zt9loea83@srv1.mail-tester.com']
+    subject = 'Hello'
+    text = 'This is Mailgun!'
+    response = send_simple_message(recipients, subject, text)
+    # response = send_simple_message(recipients, subject, text, admin=get_config('admin'))
+
+    print(response)
+    print(response.text)
+else:
+    from utils import utils
