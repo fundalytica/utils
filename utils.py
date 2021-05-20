@@ -9,6 +9,8 @@ import pandas as pd
 from colorama import Style
 from pympler import asizeof
 
+from datetime import timedelta
+
 # user confirmation prompt
 def confirm(question, default='no'):
     if default is None:
@@ -78,3 +80,7 @@ def pd_ts_to_unix_ts(pd_ts):
 # unique list
 def unique(lst):
     return list(set(lst))
+
+# fractional days delta
+def days_delta_fractional(delta):
+    return delta.total_seconds() / timedelta(days=1).total_seconds()
