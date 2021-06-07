@@ -6,7 +6,10 @@ import pathlib
 from distutils import util
 
 import pandas as pd
-from colorama import Style
+
+from colorama import init,Style
+init(autoreset=True)
+
 from pympler import asizeof
 
 from datetime import timedelta
@@ -67,7 +70,7 @@ def pretty_print(obj):
 
 # color print
 def cprint(text, color):
-    print(f'{color}{text}{Style.RESET_ALL}')
+    print(f'{color}{text}')
 
 # data size in mb
 def mbsize(data):
