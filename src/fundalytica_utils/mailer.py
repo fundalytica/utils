@@ -49,4 +49,4 @@ if __name__ == "__main__":
     utils.cprint(response, Fore.YELLOW)
     utils.cprint(response.text, Fore.MAGENTA)
 else:
-    from utils import utils
+    from . import utils

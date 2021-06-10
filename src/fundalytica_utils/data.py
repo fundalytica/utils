@@ -1,6 +1,6 @@
 # import csv
 
-from utils import utils
+from . import utils
 
 from colorama import Fore
 
